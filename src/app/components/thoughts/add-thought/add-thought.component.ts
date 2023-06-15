@@ -11,12 +11,20 @@ export class AddThoughtComponent implements OnInit {
     id: '1',
     content: 'Aprendendo Angular',
     author: 'Dev',
-    model: ''
+    model: 'modelo2'
   }
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public addThought(): void {
+
+  }
+
+  public cancelThoughtCreation(): void {
+
   }
 
 }
