@@ -3,7 +3,7 @@
       <h2 class="ff-inter">Meu Mural</h2>
       <button routerLink="/add-thought" class="botao">Adicionar pensamento</button>
   </header>
-  <div class="mural">
+  <div class="mural" *ngIf="thoughtList.length > 0, else semPensamentos">
     <div *ngFor="let thought of thoughtList">
       <!-- [thought] is the property declared in thought component with @Input()
       and the other is the variable coming from parent -->
@@ -11,3 +11,8 @@
     </div>
   </div>
 </section>
+<ng-template #semPensamentos>
+  <div class="ff-inter sem-pensamentos">
+    <p>Ainda não há pensamentos cadastrados!</p>
+  </div>
+</ng-template>
