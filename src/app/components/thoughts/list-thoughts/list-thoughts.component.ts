@@ -1,3 +1,4 @@
+import { ThoughtService } from './../thought.service';
 import { Thought } from './../thought';
 import { Component, OnInit } from '@angular/core';
 
@@ -10,9 +11,12 @@ export class ListThoughtsComponent implements OnInit {
 
   thoughtList: Thought[] = [];
 
-  constructor() { }
+  constructor(private thoughtService: ThoughtService) { }
 
   ngOnInit(): void {
+    this.thoughtService.getThoughts().subscribe((thoughtList) => {
+      this.thoughtList = thoughtList;
+    });
   }
 
 }
