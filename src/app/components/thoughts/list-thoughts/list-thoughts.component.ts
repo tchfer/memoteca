@@ -17,6 +17,11 @@ export class ListThoughtsComponent implements OnInit {
       content: "My prop is decorated with @Input",
       author: "Child component",
       model: 'modelo1'
+    },
+    {
+      content: "Elit nulla consectetur duis ipsum est reprehenderit reprehenderit. Mollit quis dolore quis deserunt incididunt ipsum ad dolore veniam velit. Id quis consequat minim aliquip anim pariatur est anim incididunt sint culpa. Amet laborum deserunt exercitation minim dolore proident laboris. Aliquip proident ea non excepteur laborum ullamco laboris amet nulla incididunt fugiat do nostrud et.",
+      author: "Child component",
+      model: 'modelo1'
     }
   ];
 
