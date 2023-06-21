@@ -3,7 +3,7 @@
   <p class="conteudo">{{ thought.content }}</p>
   <p class="autoria"><b>{{ thought.author }}</b></p>
   <div class="acoes">
-    <button class="botao-editar">
+    <button class="botao-editar" routerLink="/thoughts/edit-thought/{{ thought.id }}">
       <img src="../../../../assets/images/icone-editar.png" alt="Ícone de editar">
     </button>
     <button class="botao-excluir" routerLink="/thoughts/delete-thought/{{ thought.id }}">
