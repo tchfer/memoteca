@@ -1,6 +1,6 @@
 import { Thought } from './thought';
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -12,8 +12,13 @@ export class ThoughtService {
 
   constructor(private http: HttpClient) { }
 
-  getThoughts(): Observable<Thought[]> {
-    return this.http.get<Thought[]>(this.API);
+  getThoughts(page: number): Observable<Thought[]> {
+    const itemsPerPage = 6;
+
+    let params = new HttpParams().set("_page", page).set("_limit", itemsPerPage)
+    // Not a good pratice to concatenate
+    // return this.http.get<Thought[]>(`${this.API}?_page=${page}&_limit=${itemsPerPage}`);
+    return this.http.get<Thought[]>(this.API, { params }); // { params: params } when var and value have same name, omit
   }
 
   addThought(thought: Thought): Observable<Thought> {
