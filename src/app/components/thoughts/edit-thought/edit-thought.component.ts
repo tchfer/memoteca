@@ -23,23 +23,24 @@ export class EditThoughtComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.service.searchById(parseInt(id!)).subscribe(thought => {
-    this.createForm();
+    this.createForm(thought);
     });
   }
 
-  createForm(): void {
+  createForm(thought: Thought): void {
     this.form = this.formBuilder.group({
-      content: ['', Validators.compose([
+      id: [thought.id],
+      content: [thought.content, Validators.compose([
         Validators.required,
         Validators.pattern(/(.|\s)*\S(.|\s)*/),
       ])
     ],
-      author: ['', Validators.compose([
+      author: [thought.author, Validators.compose([
         Validators.required,
         Validators.minLength(3),
       ])
     ],
-      model: ['']
+      model: [thought.model]
     });
   }
 
