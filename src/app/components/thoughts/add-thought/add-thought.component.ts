@@ -51,4 +51,12 @@ export class AddThoughtComponent implements OnInit {
     this.router.navigate(['/list-thoughts']);
   }
 
+  public enableButton(): string {
+    if(this.form.valid) {
+      return 'botao'
+    } else {
+      return 'botao__desabilitado'
+    }
+  }
+
 }

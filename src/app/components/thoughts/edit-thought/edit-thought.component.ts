@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Thought } from '../thought';
 import { ThoughtService } from '../thought.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-thought',
@@ -10,34 +11,54 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class EditThoughtComponent implements OnInit {
 
-  thought: Thought = {
-    id: 0,
-    content: '',
-    author: '',
-    model: ''
-  }
+  form!: FormGroup;
 
   constructor(
     private service: ThoughtService,
     private router: Router,
     private route: ActivatedRoute,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.service.searchById(parseInt(id!)).subscribe(thought => {
-      this.thought = thought;
+    this.createForm();
+    });
+  }
+
+  createForm(): void {
+    this.form = this.formBuilder.group({
+      content: ['', Validators.compose([
+        Validators.required,
+        Validators.pattern(/(.|\s)*\S(.|\s)*/),
+      ])
+    ],
+      author: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(3),
+      ])
+    ],
+      model: ['']
     });
   }
 
   editThought() {
-    this.service.editThought(this.thought).subscribe(() => {
+    this.service.editThought(this.form.value).subscribe(() => {
       this.router.navigate(["/list-thoughts"]);
     });
   }
 
   cancelEdition() {
     this.router.navigate(["/list-thoughts"]);
+  }
+
+  public enableButton(): string {
+    if(this.form.valid) {
+      return 'botao'
+    } else {
+      return 'botao__desabilitado'
+    }
   }
 
 }
