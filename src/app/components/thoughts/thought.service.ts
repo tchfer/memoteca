@@ -12,10 +12,13 @@ export class ThoughtService {
 
   constructor(private http: HttpClient) { }
 
-  getThoughts(page: number): Observable<Thought[]> {
+  getThoughts(page: number, filter: string): Observable<Thought[]> {
     const itemsPerPage = 6;
 
-    let params = new HttpParams().set("_page", page).set("_limit", itemsPerPage)
+    let params = new HttpParams().set("_page", page).set("_limit", itemsPerPage);
+    if(filter.trim().length > 2) {
+      params = params.set("q", filter);
+    }
     // Not a good pratice to concatenate
     // return this.http.get<Thought[]>(`${this.API}?_page=${page}&_limit=${itemsPerPage}`);
     return this.http.get<Thought[]>(this.API, { params }); // { params: params } when var and value have same name, omit

@@ -13,24 +13,35 @@ export class ListThoughtsComponent implements OnInit {
   thoughtList: Thought[] = [];
   currentPage: number = 1;
   hasMoreThoughts: boolean = true;
+  filter: string = '';
 
   constructor(
     private thoughtService: ThoughtService,
   ) { }
 
   ngOnInit(): void {
-    this.thoughtService.getThoughts(this.currentPage).subscribe((thoughtList) => {
+    this.thoughtService.getThoughts(this.currentPage, this.filter).subscribe((thoughtList) => {
       this.thoughtList = thoughtList;
     });
   }
 
-  loadMoreThoughts() {
-    this.thoughtService.getThoughts(++this.currentPage).subscribe(newThoughts => {
+  loadMoreThoughts(): void {
+    this.thoughtService.getThoughts(++this.currentPage, this.filter).subscribe(newThoughts => {
       this.thoughtList.push(...newThoughts);
       if(!newThoughts.length) {
         this.hasMoreThoughts = false;
       }
     });
+  }
+
+  filterThoughts(): void {
+    this.hasMoreThoughts = true;
+    this.currentPage = 1;
+    this.thoughtService.getThoughts(this.currentPage, this.filter)
+      .subscribe((thoughtList) => {
+        (this.thoughtList = thoughtList)
+      }
+    );
   }
 
 }
