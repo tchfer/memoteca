@@ -35,7 +35,9 @@ export class AddThoughtComponent implements OnInit {
         Validators.minLength(3),
       ])
     ],
-      model: ['']
+      model: [''],
+      favorite: [false]
+
     });
   }
 

@@ -40,7 +40,8 @@ export class EditThoughtComponent implements OnInit {
         Validators.minLength(3),
       ])
     ],
-      model: [thought.model]
+      model: [thought.model],
+      favorite: [thought.favorite]
     });
   }
 

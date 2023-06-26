@@ -12,7 +12,8 @@ export class ThoughtComponent implements OnInit {
     id: 0,
     content: "I love Angular",
     author: "Fernando",
-    model: 'modelo2'
+    model: 'modelo2',
+    favorite: false
   }
 
   constructor() { }
