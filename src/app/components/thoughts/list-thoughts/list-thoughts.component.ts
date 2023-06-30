@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Thought } from './../thought';
 import { ThoughtService } from './../thought.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-thoughts',
@@ -19,6 +20,7 @@ export class ListThoughtsComponent implements OnInit {
 
   constructor(
     private thoughtService: ThoughtService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -55,6 +57,18 @@ export class ListThoughtsComponent implements OnInit {
         this.thoughtList = favoriteThoughtsList
         this.favoriteList = favoriteThoughtsList
       });
+  }
+
+  reloadComponent(): void {
+    // location.reload(); Not a great option as it reloads the whole page
+    this.favoriteThoughts = false;
+    this.currentPage = 1;
+
+    // router reuses instance when navigating to that same component.
+    // This tells angular we don't want to reuse routes
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload'; // reload or ignore
+    this.router.navigate([this.router.url]);
   }
 
 }
