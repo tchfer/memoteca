@@ -22,7 +22,11 @@
     <div *ngFor="let thought of thoughtList">
       <!-- [thought] is the property declared in thought component with @Input()
       and the other is the variable coming from parent -->
-      <app-thought [thought]="thought"></app-thought>
+      <app-thought
+        [thought]="thought"
+        [favoriteList]="favoriteList"
+      >
+      </app-thought>
     </div>
   </div>
 </section>
