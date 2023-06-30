@@ -17,6 +17,7 @@ export class ListThoughtsComponent implements OnInit {
   filter: string = '';
   favoriteThoughts: boolean = false;
   favoriteList: Thought[]= [];
+  title: string = 'Meu mural';
 
   constructor(
     private thoughtService: ThoughtService,
@@ -49,6 +50,7 @@ export class ListThoughtsComponent implements OnInit {
   }
 
   listFavoriteThoughts(): void {
+    this.title = 'Meus Favoritos';
     this.favoriteThoughts = true;
     this.hasMoreThoughts = true;
     this.currentPage = 1;
