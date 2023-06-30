@@ -12,12 +12,16 @@ export class ThoughtService {
 
   constructor(private http: HttpClient) { }
 
-  getThoughts(page: number, filter: string): Observable<Thought[]> {
+  getThoughts(page: number, filter: string, favorite: boolean): Observable<Thought[]> {
     const itemsPerPage = 6;
 
     let params = new HttpParams().set("_page", page).set("_limit", itemsPerPage);
     if(filter.trim().length > 2) {
       params = params.set("q", filter);
+    }
+
+    if(favorite) {
+      params = params.set("favorite", true);
     }
     // Not a good pratice to concatenate
     // return this.http.get<Thought[]>(`${this.API}?_page=${page}&_limit=${itemsPerPage}`);

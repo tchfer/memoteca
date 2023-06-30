@@ -6,6 +6,15 @@
   margin: 1rem 0 2rem;
 }
 
+.botoes {
+  display: flex;
+  justify-content: center;
+}
+
+.botoes button {
+  margin: 0 2px 0 10px;
+}
+
 .d-flex{
   display: flex;
   flex-direction: column;
